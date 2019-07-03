@@ -1,7 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE web-app PUBLIC
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
-
+<!-- 注意上面的声明,如果你的xml报错很可能是因为没有按照web-app_2_3.dtd规定的次序配置 -->
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+  <display-name>Simple Bookstore</display-name>
+
+  <servlet>
+    <servlet-name>SpringMVC</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:spring-mvc.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SpringMVC</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
 </web-app>

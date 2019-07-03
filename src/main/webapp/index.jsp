@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="study.ssm.service.impl.BookServiceImpl" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page isELIgnored="false" %>
 <html>
 <head>
     <title>主页</title>
@@ -15,13 +16,15 @@
 <body>
     <div style="margin: auto; width: 60%;">
         <div style="float: right;">
+            ${actionState}
+            <br>
             <%
                 String username = (String) session.getAttribute("username");
                 if(username != null){
-                    out.print("welcome," + username + "<a href='logout'>注销</a>");
+                    out.print("welcome," + username + "<a href='"+ request.getContextPath() +"/user/logout'>注销</a>");
                 }else{
             %>
-            <form action="login" method="post">
+            <form action="${pageContext.request.contextPath}/user/login" method="post">
                 <label>
                     用户名：
                     <input type="text" name="username">
@@ -47,9 +50,9 @@
                 BookServiceImpl bookService = new BookServiceImpl();
                 List<Book> books = bookService.getBookList();
                 if(username != null){
-                    out.print("<tr> <form action='insertBook' method='GET'>" +
+                    out.print("<tr> <form action='"+request.getContextPath()+"/book/insert' method='GET'>" +
                             "<td>添加书籍</td>" +
-                            "<td><input type='text' name='bookname' placeholder='书名'></td>" +
+                            "<td><input type='text' name='bookName' placeholder='书名'></td>" +
                             "<td><input type='text' name='writer' placeholder='作者'></td>" +
                             "<td><input type='submit' value='提 交'></td>" +
                             "</form></tr>");
@@ -60,7 +63,7 @@
                             "<td>"+ book.getBid() +"</td>" +
                             "<td>"+ book.getBookName() +"</td>" +
                             "<td>"+ book.getWriter() +"</td>" +
-                            "<td><a href='deleteBook?bid="+ book.getBid() +"'>删除</a></td>" +
+                            "<td><a href='"+ request.getContextPath() +"/book/delete?bid="+ book.getBid() +"'>删除</a></td>" +
                             "</tr>");
                 }
             %>
