@@ -3,7 +3,6 @@ package study.ssm.dao.impl;
 import study.ssm.dao.UserDAO;
 import study.ssm.entity.User;
 import study.ssm.utils.MySqlSessionFactory;
-
 import java.io.IOException;
 
 public class UserDAOImpl implements UserDAO {

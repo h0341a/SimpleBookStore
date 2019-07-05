@@ -3,7 +3,6 @@ package study.ssm.dao.impl;
 import study.ssm.dao.BookDAO;
 import study.ssm.entity.Book;
 import study.ssm.utils.MySqlSessionFactory;
-
 import java.io.IOException;
 import java.util.List;
 
