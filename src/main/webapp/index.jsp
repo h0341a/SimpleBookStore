@@ -1,6 +1,4 @@
-<%@ page import="study.ssm.entity.Book" %>
-<%@ page import="java.util.List" %>
-<%@ page import="study.ssm.service.impl.BookServiceImpl" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page isELIgnored="false" %>
 <html>
@@ -47,8 +45,6 @@
         <div style="text-align: center">
             <table style="text-align: center; margin: auto;">
             <%
-                BookServiceImpl bookService = new BookServiceImpl();
-                List<Book> books = bookService.getBookList();
                 if(username != null){
                     out.print("<tr> <form action='"+request.getContextPath()+"/book/insert' method='GET'>" +
                             "<td>添加书籍</td>" +
@@ -57,16 +53,16 @@
                             "<td><input type='submit' value='提 交'></td>" +
                             "</form></tr>");
                 }
-                out.print("<tr><td>id</td><td>name</td><td>writer</td><td>op</td></tr>");
-                for(Book book: books){
-                    out.print("<tr>" +
-                            "<td>"+ book.getBid() +"</td>" +
-                            "<td>"+ book.getBookName() +"</td>" +
-                            "<td>"+ book.getWriter() +"</td>" +
-                            "<td><a href='"+ request.getContextPath() +"/book/delete?bid="+ book.getBid() +"'>删除</a></td>" +
-                            "</tr>");
-                }
             %>
+                <tr><td>id</td><td>name</td><td>writer</td><td>op</td></tr>
+                <c:forEach items="${books}" var="book">
+                    <tr>
+                        <td>${book.getBid()}</td>
+                        <td>${book.getBookName()}</td>
+                        <td>${book.getWriter()}</td>
+                        <td><a href='${pageContext.request.contextPath}/book/delete?bid=${book.getBid()}'>删除</a></td>
+                    </tr>
+                </c:forEach>
             </table>
         </div>
     </div>

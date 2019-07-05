@@ -1,13 +1,19 @@
 package study.ssm.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import study.ssm.dao.UserDAO;
-import study.ssm.dao.impl.UserDAOImpl;
 import study.ssm.entity.User;
 import study.ssm.service.UserService;
 
+@Service
 public class UserServiceImpl implements UserService {
 
-    private UserDAOImpl userDAO = new UserDAOImpl();
+    private final UserDAO userDAO;
+
+    public UserServiceImpl(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
 
     @Override
     public boolean checkUser(User user) {

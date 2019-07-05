@@ -1,15 +1,21 @@
 package study.ssm.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import study.ssm.dao.BookDAO;
-import study.ssm.dao.impl.BookDAOImpl;
 import study.ssm.entity.Book;
 import study.ssm.service.BookService;
 
 import java.util.List;
 
+@Service
 public class BookServiceImpl implements BookService {
 
-    private BookDAOImpl bookDAO = new BookDAOImpl();
+    private final BookDAO bookDAO;
+
+    public BookServiceImpl(BookDAO bookDAO) {
+        this.bookDAO = bookDAO;
+    }
 
     @Override
     public List<Book> getBookList() {
